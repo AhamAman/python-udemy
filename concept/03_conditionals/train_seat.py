@@ -1,6 +1,6 @@
 seat_type = input("Enter seat type (sleeper/AC/general/luxury)").lower()
 
-
+#case_ mean not matched above like default in switch case in other languages
 match seat_type:
     case "sleeper":
         print("Sleeper - No AC, beds available")

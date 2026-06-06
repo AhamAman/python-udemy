@@ -1,6 +1,6 @@
 # 🌿 Python Conditionals: Mastery Checklist
 
-A complete roadmap from beginner usage to deep language internals, design decisions, performance considerations, and real-world engineering applications.
+A complete roadmap from beginner usage to deep language internals, design decisions, performance considerations, and real-world engineering applications. All are not covered now but eventualy will be.
 
 ---
 

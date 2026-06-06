@@ -1,6 +1,6 @@
 # 🔄 Python Loops: Mastery Checklist
 
-A complete roadmap from beginner usage to deep internals, performance considerations, iteration protocols, and professional engineering patterns.
+A complete roadmap from beginner usage to deep internals, performance considerations, iteration protocols, and professional engineering patterns. All are not covered now but eventually will be
 
 ---
 

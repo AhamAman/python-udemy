@@ -1,3 +1,4 @@
+# function introspection and docstring
 def chai_flavor(flavor="masala"):
     """Return the flavor of chai."""
     chai="ginger"

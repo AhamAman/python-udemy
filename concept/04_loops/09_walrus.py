@@ -7,6 +7,7 @@
 
 value = 13
 
+#statement and assignment in one line using walrus operator
 if remainder := value % 5:
     print(f"Not divisible, remainder is {remainder}")
 

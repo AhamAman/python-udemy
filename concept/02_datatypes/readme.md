@@ -4,7 +4,7 @@ A roadmap from beginner usage to deep CPython internals.
 
 ---
 
-# 🌱 First Principles
+## 🌱 First Principles
 
 * [ ] What is data?
 * [ ] What is a value?
@@ -19,7 +19,7 @@ A roadmap from beginner usage to deep CPython internals.
 
 ---
 
-# 🔢 Numeric Types
+## 🔢 Numeric Types
 
 * [ ] What is an integer (`int`)?
 * [ ] What is a floating-point number (`float`)?
@@ -34,7 +34,7 @@ A roadmap from beginner usage to deep CPython internals.
 
 ---
 
-# 📝 Strings
+## 📝 Strings
 
 * [ ] What is a string?
 * [ ] String creation methods
@@ -51,7 +51,7 @@ A roadmap from beginner usage to deep CPython internals.
 
 ---
 
-# ✅ Booleans
+## ✅ Booleans
 
 * [ ] What is a Boolean?
 * [ ] True vs False
@@ -63,7 +63,7 @@ A roadmap from beginner usage to deep CPython internals.
 
 ---
 
-# 📦 Lists
+## 📦 Lists
 
 * [ ] What is a list?
 * [ ] Why use lists?
@@ -84,7 +84,7 @@ A roadmap from beginner usage to deep CPython internals.
 
 ---
 
-# 📦 Tuples
+## 📦 Tuples
 
 * [ ] What is a tuple?
 * [ ] Why tuples exist
@@ -96,7 +96,7 @@ A roadmap from beginner usage to deep CPython internals.
 
 ---
 
-# 🎯 Sets
+## 🎯 Sets
 
 * [ ] What is a set?
 * [ ] Why duplicates disappear
@@ -110,7 +110,7 @@ A roadmap from beginner usage to deep CPython internals.
 
 ---
 
-# 🗂 Dictionaries
+## 🗂 Dictionaries
 
 * [ ] What is a dictionary?
 * [ ] Key-value storage
@@ -127,7 +127,7 @@ A roadmap from beginner usage to deep CPython internals.
 
 ---
 
-# 🔄 Type Conversion
+## 🔄 Type Conversion
 
 * [ ] Type casting fundamentals
 * [ ] int()
@@ -143,7 +143,7 @@ A roadmap from beginner usage to deep CPython internals.
 
 ---
 
-# 🧠 Mutability & Identity
+## 🧠 Mutability & Identity
 
 * [ ] Mutable vs immutable objects
 * [ ] Object identity
@@ -156,7 +156,7 @@ A roadmap from beginner usage to deep CPython internals.
 
 ---
 
-# 🚦 Truthiness
+## 🚦 Truthiness
 
 * [ ] Truthy values
 * [ ] Falsy values
@@ -168,7 +168,7 @@ A roadmap from beginner usage to deep CPython internals.
 
 ---
 
-# 🚫 None
+## 🚫 None
 
 * [ ] What is None?
 * [ ] Why None exists
@@ -179,7 +179,7 @@ A roadmap from beginner usage to deep CPython internals.
 
 ---
 
-# 📋 Copying Objects
+## 📋 Copying Objects
 
 * [ ] Assignment vs copying
 * [ ] Shallow copy
@@ -190,7 +190,7 @@ A roadmap from beginner usage to deep CPython internals.
 
 ---
 
-# 🔁 Iteration
+## 🔁 Iteration
 
 * [ ] What is an iterable?
 * [ ] What is an iterator?
@@ -203,7 +203,7 @@ A roadmap from beginner usage to deep CPython internals.
 
 ---
 
-# ⚡ Comprehensions
+## ⚡ Comprehensions
 
 * [ ] List comprehensions
 * [ ] Dictionary comprehensions
@@ -213,7 +213,7 @@ A roadmap from beginner usage to deep CPython internals.
 
 ---
 
-# 🔑 Hashing
+## 🔑 Hashing
 
 * [ ] What is hashing?
 * [ ] hash()
@@ -225,7 +225,7 @@ A roadmap from beginner usage to deep CPython internals.
 
 ---
 
-# 🏗 Python Object Model
+## 🏗 Python Object Model
 
 * [ ] Everything is an object
 * [ ] Object identity
@@ -237,7 +237,7 @@ A roadmap from beginner usage to deep CPython internals.
 
 ---
 
-# 🧬 Memory Internals
+## 🧬 Memory Internals
 
 * [ ] Memory addresses
 * [ ] Small integer caching
@@ -249,7 +249,7 @@ A roadmap from beginner usage to deep CPython internals.
 
 ---
 
-# ⚙️ Collection Internals
+## ⚙️ Collection Internals
 
 * [ ] How lists are implemented
 * [ ] Dynamic arrays
@@ -262,7 +262,7 @@ A roadmap from beginner usage to deep CPython internals.
 
 ---
 
-# 🐍 CPython Internals
+## 🐍 CPython Internals
 
 * [ ] PyObject structure
 * [ ] PyVarObject structure
@@ -275,7 +275,7 @@ A roadmap from beginner usage to deep CPython internals.
 
 ---
 
-# 📈 Performance Engineering
+## 📈 Performance Engineering
 
 * [ ] Big-O of lists
 * [ ] Big-O of tuples
@@ -288,7 +288,7 @@ A roadmap from beginner usage to deep CPython internals.
 
 ---
 
-# 🏛 System Design Perspective
+## 🏛 System Design Perspective
 
 * [ ] Choosing the right data structure
 * [ ] Mutability in large systems
@@ -301,7 +301,7 @@ A roadmap from beginner usage to deep CPython internals.
 
 ---
 
-# 🏆 Veteran Questions
+## 🏆 Veteran Questions
 
 * [ ] Why is everything an object?
 * [ ] Why are dictionaries so fast?

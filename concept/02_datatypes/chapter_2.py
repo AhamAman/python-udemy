@@ -13,6 +13,7 @@ print(f"Updated Name: {chef_name} | ID: {id(chef_name)}")
 print("-" * 40)
 
 # 2. Mutable Example (Your Set)
+#yes set is mutable
 spice_mix = set()
 print(f"Initial Mix : {spice_mix}       | ID: {id(spice_mix)}")
 

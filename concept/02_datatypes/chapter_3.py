@@ -1,4 +1,4 @@
-# Interger
+# All about Py internals
 
 black_tea_grams = 14
 ginger_grams = 3

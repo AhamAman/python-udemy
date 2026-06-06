@@ -1,6 +1,8 @@
+# Boolean upcasting and operations
+
 is_boiling = True
 stri_count = 5
-total_actions = stri_count + is_boiling # upcasting
+total_actions = stri_count + is_boiling # upcasting boolean to integer
 print(f"Total actions: {total_actions}")
 
 milk_present = 0 # no milk
@@ -11,3 +13,4 @@ tea_added = True
 
 can_server = water_hot and tea_added
 print(f"Can serve chai? {can_server}")
+

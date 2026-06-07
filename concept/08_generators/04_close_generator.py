@@ -6,6 +6,7 @@ def imported_chai():
     yield "Matcha"
     yield "Oolong"
 
+#yeild from is used to delegate part of a generator's operations to another generator. It allows you to yield all values from another generator without having to write an explicit loop.
 def full_menu():
     yield from local_chai()
     yield from imported_chai()

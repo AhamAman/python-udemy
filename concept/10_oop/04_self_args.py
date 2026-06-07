@@ -1,3 +1,7 @@
+'''
+Explicit execution context with self 
+'''
+
 class Chaicup:
     size = 150 #ml
 

@@ -23,12 +23,15 @@ class ChaiUtils:
         return size in ["Small", "Medium", "Large"]
 
 
+#static metod to validate input
 print(ChaiUtils.is_valid_size("Medium"))
+
 
 order1 = ChaiOrder.from_dict({"tea_type": "masala", "sweetness": "medium", "size":"Large"})
 
 order2 = ChaiOrder.from_string("Ginger-Low-Small")
 
+#from constructor
 order3 = ChaiOrder("Large", "Low", "Large")
 
 print(order1.__dict__)

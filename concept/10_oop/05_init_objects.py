@@ -1,5 +1,6 @@
 class ChaiOrder:
-    
+
+    #initialiser method
     def __init__(self, type_, size):
         self.type = type_
         self.size = size

@@ -1,3 +1,5 @@
+# ways of inheritance and composition
+
 class BaseChai:
     def __init__(self, type_):
         self.type = type_
@@ -5,11 +7,12 @@ class BaseChai:
     def prepare(self):
         print(f"Preparing {self.type} chai....")
 
+#direct inheritance
 class MasalaChai(BaseChai):
     def add_spices(self):
         print("Adding cardamom, ginger, cloves.")
 
-
+#composition
 class ChaiShop:
     chai_cls = BaseChai
 

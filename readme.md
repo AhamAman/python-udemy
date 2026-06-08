@@ -1,15 +1,11 @@
 # 🐍 Complete Python Programming Course
 
+I use this course as a base to learn, experiment and add understanding and add more to this cource by
+
 **Master Python from Basics to Advanced with Real-World Projects**
 
 > **Course Link**: [hitesh.ai](https://hitesh.ai)  
 > **Instructor**: Hitesh Choudhary
-
----
-
-## 📚 Course Overview
-
-This comprehensive Python course takes you from absolute beginner to advanced Python developer through hands-on projects and practical examples. Learn Python fundamentals, advanced concepts, and build real-world applications that showcase your skills.
 
 ---
 
@@ -111,91 +107,4 @@ This comprehensive Python course takes you from absolute beginner to advanced Py
 
 ---
 
-## 🛠️ Technologies & Tools Covered
-
-- **Python 3.x** - Core programming language
-- **Flask** - Web framework for building applications
-- **SQLite** - Database management
-- **Pandas** - Data manipulation and analysis
-- **Matplotlib/Seaborn** - Data visualization
-- **Requests** - HTTP library for API calls
-- **Beautiful Soup** - Web scraping
-- **Threading/Multiprocessing** - Concurrency
-- **Asyncio** - Asynchronous programming
-
----
-
-## 📋 Prerequisites
-
-- Basic computer literacy
-- No prior programming experience required
-- Windows, macOS, or Linux operating system
-- Internet connection for downloading packages
-
----
-
-## 🎓 Learning Outcomes
-
-By the end of this course, you will be able to:
-
-✅ **Write clean, efficient Python code**  
-✅ **Build complete web applications**  
-✅ **Scrape and analyze data from the web**  
-✅ **Create automation scripts**  
-✅ **Work with databases and APIs**  
-✅ **Implement concurrent and asynchronous programs**  
-✅ **Apply object-oriented programming principles**  
-✅ **Handle errors and exceptions professionally**  
-✅ **Use advanced Python features effectively**  
-✅ **Deploy real-world Python applications**
-
----
-
-## 🏆 Course Highlights
-
-- **200+ Practical Examples** - Learn by doing with real code
-- **6 Complete Projects** - Build portfolio-worthy applications
-- **Progressive Difficulty** - From beginner to advanced concepts
-- **Industry Best Practices** - Learn professional coding standards
-- **Hands-On Challenges** - Daily exercises to reinforce learning
-- **Real-World Applications** - Solve actual problems with Python
-
----
-
-## 📖 How to Use This Repository
-
-1. **Clone or download** this repository
-2. **Follow the folder structure** in numerical order
-3. **Complete exercises** in each chapter
-4. **Build projects** in the challenges section
-5. **Practice regularly** with the provided examples
-
----
-
-## 🎯 Target Audience
-
-- **Beginners** - No prior programming experience
-- **Students** - Learning Python for academic purposes
-- **Professionals** - Wanting to add Python to their skill set
-- **Career Changers** - Transitioning to software development
-- **Hobbyists** - Interested in automation and data analysis
-
----
-
-## 📞 Support & Community
-
-- **Course Platform**: [hitesh.ai](https://hitesh.ai)
-- **Instructor**: Hitesh Choudhary
-- **Community**: Join the course community for discussions and support
-
----
-
-## 📄 License
-
-This course material is provided for educational purposes. Please respect the instructor's intellectual property and course terms.
-
----
-
-**Ready to start your Python journey?** 🚀
-
-*Begin with the basics in `00_python/` and work your way through to building complete applications!*
+### I will blog learning at 

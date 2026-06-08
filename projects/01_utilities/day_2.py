@@ -33,39 +33,67 @@ Bonus:
 - Ask the user if they want to save the result into a `.txt` file.
 """
 
-import textwrap
-name = input("Enter your name: ").strip()
-profession = input("Enter your profession: ").strip()
-passion = input("Enter your passion in one line: ").strip()
-emoji = input("Enter your favourite emoji: ").strip()
-website = input("Enter your website: ").strip()
+import datetime
 
-print("\nChoose your style: ")
-print("1. Simple lines ")
-print("2. Vertical flair ")
-print("3. Emoji sandwich ")
-
-style = input("Enter 1, 2 or 3: ").strip()
-
-def generate_bio(style):
+def generate_bio(name: str, profession: str, passion: str, emoji: str, website: str, style: str) -> str:
+    """Core Utility: Accepts cleaned inputs and maps them to a layout design."""
     if style == "1":
-        return f"{emoji} {name} | {profession} \n💡 {passion}\n {website}" 
+        return f"{emoji} {name} | {profession}\n💡 {passion}\n🔗 {website}"
     elif style == "2":
-        return f"{emoji} {name}\n {profession}🔥\n {passion} \n {website}🔥"
+        return f"{emoji} {name}\n🚀 {profession}\n🔥 {passion}\n🌐 {website}"
     elif style == "3":
-        return f"{emoji*3}\n {name} - {profession}\n {passion}\n {website} \n {emoji*3}"
+        edge = emoji * 4
+        return f"{edge}\n✨ {name}\n💼 {profession}\n📝 {passion}\n🔗 {website}\n{edge}"
+    else:
+        # Safety net fallback
+        return f"{emoji} {name} | {profession}\n💡 {passion}\n🔗 {website}"
+
+def main():
+    print("--- 📱 SOCIAL MEDIA BIO GENERATOR 📱 ---\n")
     
-bio = generate_bio(style)
+    # 1. Gather & Clean Inputs with smart defaults
+    name = input("Enter your name: ").strip().title()
+    profession = input("Enter your profession: ").strip().title()
+    passion = input("Enter your passion in one line: ").strip()
+    
+    emoji = input("Enter your favorite emoji (Press Enter for 🚀): ").strip() or "🚀"
+    website = input("Enter your website/handle (Press Enter to skip): ").strip() or "linkin.bio/me"
 
-print("\nYour stylish bio:\n")
-print("*" * 50)
-print(textwrap.dedent(bio))
-print("*" * 50)
+    # 2. Bulletproof Menu Selection Loop
+    print("\nChoose your style:")
+    print("1. Simple & Clean Lines")
+    print("2. Professional Stack")
+    print("3. Emoji Border Sandwich")
+    
+    while True:
+        style = input("Enter 1, 2 or 3: ").strip()
+        if style in ["1", "2", "3"]:
+            break
+        print("❌ Invalid selection. Choose 1, 2, or 3.")
 
-save = input("Do you want to save this bio to a text file? (y/n): ").lower()
+    # 3. Generate the Bio Core Data
+    bio = generate_bio(name, profession, passion, emoji, website, style)
 
-if save == 'y':
-    filename = f"{name.lower().replace(' ', '_')}_bio.txt"
-    with open(filename, "w", encoding="utf-8") as f:
-        f.write(bio)
-    print("file saved")
+    # 4. Display Card with Auto-Sizing Box Frame
+    lines = bio.split("\n")
+    max_len = max(len(line) for line in lines)
+    horizontal_border = "━" * (max_len + 4)
+
+    print("\nYour Stylish Bio Blueprint:\n")
+    print(f"┏{horizontal_border}┓")
+    for line in lines:
+        print(f"┃  {line.ljust(max_len)}  ┃")
+    print(f"┗{horizontal_border}┛\n")
+
+    # 5. File System Exporter
+    save = input("💾 Save bio to a text file? (y/n): ").strip().lower()
+    if save == 'y':
+        filename = f"{name.lower().replace(' ', '_')}_bio.txt"
+        with open(filename, "w", encoding="utf-8") as f:
+            f.write(bio)
+            f.write(f"\n\n[Generated on: {datetime.date.today().isoformat()}]")
+        print(f"✨ Success! File saved cleanly as '{filename}'")
+
+# Runs the program only if this specific file is executed directly
+if __name__ == "__main__":
+    main()

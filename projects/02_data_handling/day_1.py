@@ -33,10 +33,12 @@ import os
 
 FILENAME = "contacts.csv"
 
+#check if file exists, if not create it with headers
 if not os.path.exists(FILENAME):
     with open(FILENAME, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(["Name", "Phone", "Email"])
+
 
 def add_contact():
     name = input("Name: ").strip()

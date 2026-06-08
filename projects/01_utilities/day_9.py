@@ -14,24 +14,68 @@ Bonus:
 """
 
 import time
+import tkinter as tk
+from tkinter import messagebox
 
-while True:
+def get_total_seconds():
+    """Prompts user for minutes and seconds, returning total duration in seconds."""
+    print("⏳ Set your timer:")
+    while True:
+        try:
+            minutes = int(input("   Enter minutes: ") or 0)
+            seconds = int(input("   Enter seconds: ") or 0)
+            
+            total = (minutes * 60) + seconds
+            if total <= 0:
+                print("❌ Please enter a duration greater than 0 seconds.\n")
+                continue
+            return total
+        except ValueError:
+            print("❌ Invalid input. Please enter whole numbers only.\n")
+
+def trigger_alarm():
+    """Creates a non-blocking pop-up notification window when time is up."""
+    # Hide the main root window of tkinter
+    root = tk.Tk()
+    root.withdraw()
+    root.attributes("-topmost", True)  # Force it to appear on top of other windows
+    
+    messagebox.showinfo("⏰ Time's Up!", "Take a break or move on to your next task.")
+    root.destroy()
+
+def run_timer(total_seconds):
+    print("\n🔔 Timer started...")
+    
+    # We keep track of the initial time to calculate progress
+    initial_seconds = total_seconds 
+    
+    for remaining in range(total_seconds, -1, -1):
+        mins, secs = divmod(remaining, 60)
+        time_format = f"{mins:02}:{secs:02}"
+        
+        # Create a simple visual progress bar (10 blocks wide)
+        elapsed = initial_seconds - remaining
+        progress_ratio = elapsed / initial_seconds if initial_seconds > 0 else 1
+        bar_length = 10
+        filled_length = int(round(bar_length * progress_ratio))
+        bar = '█' * filled_length + '-' * (bar_length - filled_length)
+        
+        # The extra spaces at the end prevent ghost characters on the terminal
+        print(f"🕰️  [{bar}] {time_format} left    ", end="\r")
+        
+        if remaining > 0:
+            time.sleep(1)
+            
+    print("\n\n🎉 Finished!")
+    trigger_alarm()
+
+def main():
     try:
-        seconds = int(input("⏰ Enter the time in seconds: "))
-        if seconds < 1:
-            print("Please enter a number greater than 0")
-            continue
-        break
-    except ValueError:
-        print("Invalid input, please enter a whole number")
+        total_time = get_total_seconds()
+        run_timer(total_time)
+    except KeyboardInterrupt:
+        # Gracefully handle Ctrl+C without throwing an ugly stack trace
+        print("\n\n🛑 Timer cancelled by user. Goodbye!")
 
-
-print("\n 🔔 Timer started...")
-for remaining in range(seconds, 0, -1):
-    mins, secs = divmod(remaining, 60)
-    time_format = f"{mins:02}:{secs:02}"
-    print(f"🕰️ Time left: {time_format} ", end="\r")
-    time.sleep(1)
-
-print("\n Time's up! Take a break or move on to next task.")
-#print("\a") # optional; makes a beep sound
+if __name__ == "__main__":
+    main()

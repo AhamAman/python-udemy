@@ -1,422 +1,563 @@
 # Python Threading & Concurrency Mastery Checklist
 
----
+## Phase 0: Computing Foundations
 
-# Phase 0: Foundations (Must Know Before Threading)
+### Computer Fundamentals
 
-## How Computers Execute Programs
+* [ ] What is a Program?
+* [ ] What is a Process?
+* [ ] What is a Thread?
+* [ ] CPU vs Core vs Logical Core
+* [ ] Single Core vs Multi Core
+* [ ] Memory Basics
+* [ ] Stack vs Heap
+* [ ] Virtual Memory
+* [ ] User Space vs Kernel Space
 
-- [ ] What is a process?
-- [ ] What is a thread?
-- [ ] CPU vs Core
-- [ ] Single-core vs Multi-core CPUs
-- [ ] How operating systems schedule work
-- [ ] Context Switching
-- [ ] Memory layout of a process
-- [ ] Stack vs Heap memory
+### Operating System Basics
 
-### Build
+* [ ] Process Scheduling
+* [ ] Context Switching
+* [ ] Interrupts
+* [ ] System Calls
+* [ ] Blocking vs Non-Blocking Operations
 
-- [ ] Visualize multiple programs running on your machine
-- [ ] Observe processes using Task Manager / htop
+### Exercises
+
+* [ ] Observe processes in Task Manager / htop
+* [ ] Observe threads inside a process
+* [ ] Measure context switch effects
 
 ---
 
 # Phase 1: Why Concurrency Exists
 
-## Understand the Problem First
+### Problem Understanding
 
-- [ ] Why synchronous code can be slow
-- [ ] CPU waiting for I/O
-- [ ] Blocking operations
-- [ ] What is latency?
-- [ ] What is throughput?
-- [ ] Why CPUs stay idle during network calls
+* [ ] Why synchronous programs become slow
+* [ ] CPU-bound work
+* [ ] I/O-bound work
+* [ ] Latency
+* [ ] Throughput
+* [ ] Resource Utilization
 
-### Exercises
+### First Principles
 
-- [ ] Read a large file synchronously
-- [ ] Download multiple URLs synchronously
-- [ ] Measure execution time
-
-### Questions
-
-- [ ] Why is the CPU mostly idle during I/O?
-- [ ] Why doesn't adding a faster CPU solve everything?
-
----
-
-# Phase 2: Threading Fundamentals
-
-## Python Thread Module
-
-- [ ] What is a thread?
-- [ ] Why threads are lighter than processes
-- [ ] Main thread
-- [ ] Worker thread
-
-### Learn
-
-- [ ] threading.Thread
-- [ ] target function
-- [ ] args
-- [ ] start()
-- [ ] run()
-- [ ] join()
+* [ ] Why CPUs stay idle during I/O
+* [ ] Why waiting is expensive
+* [ ] Why concurrency improves utilization
+* [ ] Concurrency vs Parallelism
 
 ### Exercises
 
-- [ ] Print from multiple threads
-- [ ] Create 10 worker threads
-- [ ] Download files concurrently
+* [ ] Sequential file processing
+* [ ] Sequential network requests
+* [ ] Measure idle time
 
 ---
 
-# Phase 3: Thread Lifecycle
+# Phase 2: Python Threading Fundamentals
 
-## Understand Internals
+### Thread Basics
 
-- [ ] New state
-- [ ] Runnable state
-- [ ] Running state
-- [ ] Waiting state
-- [ ] Blocked state
-- [ ] Dead state
+* [ ] Main Thread
+* [ ] Worker Threads
+* [ ] Thread Lifecycle
+* [ ] Thread Creation Cost
 
-### Learn
+### threading Module
 
-- [ ] Daemon threads
-- [ ] Non-daemon threads
-- [ ] Thread termination
+* [ ] threading.Thread
+* [ ] target
+* [ ] args
+* [ ] kwargs
+* [ ] start()
+* [ ] run()
+* [ ] join()
+
+### Thread States
+
+* [ ] New
+* [ ] Runnable
+* [ ] Running
+* [ ] Waiting
+* [ ] Blocked
+* [ ] Terminated
 
 ### Exercises
 
-- [ ] Observe daemon behavior
-- [ ] Create background logger thread
+* [ ] Create multiple worker threads
+* [ ] Parallel file reader
+* [ ] Parallel URL downloader
 
 ---
 
-# Phase 4: Shared Memory
+# Phase 3: Shared Memory Fundamentals
 
-## The Real Challenge
+### Memory Model
 
-- [ ] Threads share memory
-- [ ] Local variables
-- [ ] Global variables
-- [ ] Shared state
+* [ ] Local Variables
+* [ ] Global Variables
+* [ ] Shared Memory
+* [ ] Object References
 
-### Learn
+### Problems
 
-- [ ] Race Conditions
-- [ ] Data Corruption
-- [ ] Lost Updates
+* [ ] Race Conditions
+* [ ] Lost Updates
+* [ ] Data Corruption
+* [ ] Non-deterministic Behavior
 
 ### Exercises
 
-- [ ] Build broken counter example
-- [ ] Demonstrate race condition
+* [ ] Broken Counter
+* [ ] Shared Bank Account Simulation
+* [ ] Race Condition Demonstration
 
 ---
 
-# Phase 5: Synchronization
+# Phase 4: Synchronization Primitives
 
-## Protect Shared Data
+### Locks
 
-### Learn
+* [ ] Lock
+* [ ] RLock
+* [ ] Lock Acquisition
+* [ ] Lock Release
 
-- [ ] Lock
-- [ ] RLock
-- [ ] Semaphore
-- [ ] BoundedSemaphore
-- [ ] Event
-- [ ] Condition
-- [ ] Barrier
+### Coordination Primitives
 
-### Understand
-
-- [ ] Critical Section
-- [ ] Mutual Exclusion
-
-### Exercises
-
-- [ ] Fix race condition using Lock
-- [ ] Producer Consumer with Condition
-- [ ] Multi-thread downloader using Semaphore
-
----
-
-# Phase 6: Thread Communication
-
-## Safe Data Exchange
-
-### Learn
-
-- [ ] queue.Queue
-- [ ] LifoQueue
-- [ ] PriorityQueue
+* [ ] Semaphore
+* [ ] BoundedSemaphore
+* [ ] Event
+* [ ] Condition
+* [ ] Barrier
 
 ### Concepts
 
-- [ ] Producer Consumer Pattern
-- [ ] Work Queue Pattern
+* [ ] Critical Section
+* [ ] Mutual Exclusion
+* [ ] Thread Safety
 
 ### Exercises
 
-- [ ] Job processing system
-- [ ] Image processing queue
-- [ ] Background email sender
+* [ ] Fix Race Condition
+* [ ] Resource Pool
+* [ ] Producer Consumer
 
 ---
 
-# Phase 7: ThreadPoolExecutor
+# Phase 5: Thread Communication
 
-## Modern Threading
+### Queues
 
-### Learn
+* [ ] queue.Queue
+* [ ] LifoQueue
+* [ ] PriorityQueue
+* [ ] Queue Internals
 
-- [ ] concurrent.futures
-- [ ] ThreadPoolExecutor
-- [ ] submit()
-- [ ] map()
-- [ ] Future objects
+### Communication Concepts
 
-### Understand
-
-- [ ] Why thread pools exist
-- [ ] Cost of thread creation
+* [ ] Producer Consumer
+* [ ] Work Distribution
+* [ ] Message Passing
 
 ### Exercises
 
-- [ ] Parallel URL fetcher
-- [ ] Bulk API caller
-- [ ] Log processor
+* [ ] Background Email Processor
+* [ ] Job Queue
+* [ ] Image Processing Pipeline
 
 ---
 
-# Phase 8: GIL Mastery
+# Phase 6: Concurrency Design Patterns
 
-## Python's Biggest Threading Topic
+### Fundamental Patterns
 
-### Learn
+* [ ] Producer Consumer
+* [ ] Worker Pool
+* [ ] Pipeline
+* [ ] Fan-Out
+* [ ] Fan-In
+* [ ] Scatter Gather
 
-- [ ] What is the GIL?
-- [ ] Why GIL exists
-- [ ] Reference Counting
-- [ ] Memory Safety
+### Intermediate Patterns
 
-### Understand
+* [ ] Task Queue
+* [ ] Batch Processing
+* [ ] Event Driven Processing
+* [ ] Request Dispatcher
 
-- [ ] Why CPU-bound threads don't scale
-- [ ] Why I/O-bound threads work well
-- [ ] Thread switching under GIL
+### Advanced Patterns
+
+* [ ] Reactor Pattern
+* [ ] Proactor Pattern
+* [ ] Leader Follower
+* [ ] Actor Model
+* [ ] Half Sync Half Async
 
 ### Exercises
 
-- [ ] CPU benchmark with threads
-- [ ] I/O benchmark with threads
-
-### Internals
-
-- [ ] CPython Interpreter
-- [ ] Bytecode Execution
-- [ ] Eval Loop
+* [ ] Build Worker Pool
+* [ ] Build Processing Pipeline
+* [ ] Build Event Dispatcher
 
 ---
 
-# Phase 9: Multiprocessing
+# Phase 7: ThreadPoolExecutor & Futures
 
-## When Threads Are Not Enough
+### Thread Pools
 
-### Learn
+* [ ] Why Thread Pools Exist
+* [ ] Thread Reuse
+* [ ] Worker Management
 
-- [ ] multiprocessing module
-- [ ] Process class
-- [ ] Pool
-- [ ] ProcessPoolExecutor
+### concurrent.futures
 
-### Understand
+* [ ] ThreadPoolExecutor
+* [ ] submit()
+* [ ] map()
+* [ ] shutdown()
 
-- [ ] Separate memory spaces
-- [ ] IPC
-- [ ] Serialization
+### Futures
+
+* [ ] Future States
+* [ ] result()
+* [ ] exception()
+* [ ] cancellation()
 
 ### Exercises
 
-- [ ] CPU intensive calculations
-- [ ] Parallel image processing
+* [ ] Bulk Downloader
+* [ ] Parallel API Aggregator
+* [ ] Log Processor
 
 ---
 
-# Phase 10: Asyncio
+# Phase 8: Failure Modes & Debugging
 
-## Another Concurrency Model
+### Race Failures
 
-### Learn
+* [ ] Read Modify Write Race
+* [ ] Check Then Act Race
+* [ ] Lost Update
 
-- [ ] Event Loop
-- [ ] Coroutine
-- [ ] async
-- [ ] await
+### Lock Failures
 
-### Understand
+* [ ] Deadlock
+* [ ] Livelock
+* [ ] Starvation
 
-- [ ] Threading vs Asyncio
-- [ ] Cooperative Scheduling
+### Resource Failures
+
+* [ ] Thread Explosion
+* [ ] Resource Exhaustion
+* [ ] Memory Exhaustion
+* [ ] Connection Pool Exhaustion
+
+### Queue Failures
+
+* [ ] Queue Overflow
+* [ ] Slow Consumer
+* [ ] Backpressure
+
+### Production Failures
+
+* [ ] Thundering Herd
+* [ ] Retry Storm
+* [ ] Cascading Failure
+* [ ] Head Of Line Blocking
+
+### Debugging
+
+* [ ] Thread Dumps
+* [ ] Logging
+* [ ] Tracing
+* [ ] Monitoring
+
+---
+
+# Phase 9: Python GIL Mastery
+
+### GIL Fundamentals
+
+* [ ] What is GIL?
+* [ ] Why GIL Exists
+* [ ] Memory Safety
+* [ ] Reference Counting
+
+### Behavior
+
+* [ ] GIL Scheduling
+* [ ] Thread Switching
+* [ ] CPU Bound Impact
+* [ ] I/O Bound Benefits
+
+### Benchmarks
+
+* [ ] CPU Thread Benchmark
+* [ ] I/O Thread Benchmark
+
+---
+
+# Phase 10: Multiprocessing
+
+### Process Basics
+
+* [ ] Process Memory
+* [ ] Process Isolation
+* [ ] Process Creation
+
+### multiprocessing Module
+
+* [ ] Process
+* [ ] Pool
+* [ ] Queue
+* [ ] Pipe
+* [ ] Shared Memory
+
+### ProcessPoolExecutor
+
+* [ ] submit()
+* [ ] map()
 
 ### Exercises
 
-- [ ] Async web scraper
-- [ ] Async API client
+* [ ] Prime Number Calculator
+* [ ] Image Processor
+* [ ] Data Cruncher
 
 ---
 
-# Phase 11: Concurrency Design Patterns
+# Phase 11: Asyncio
 
-### Patterns
+### Core Concepts
 
-- [ ] Producer Consumer
-- [ ] Worker Pool
-- [ ] Pipeline
-- [ ] Fan Out
-- [ ] Fan In
-- [ ] Publish Subscribe
+* [ ] Event Loop
+* [ ] Coroutine
+* [ ] Task
+* [ ] Future
 
-### Projects
+### Syntax
 
-- [ ] Multi-threaded downloader
-- [ ] Log processing system
-- [ ] Background task queue
+* [ ] async
+* [ ] await
+* [ ] gather()
+* [ ] create_task()
 
----
+### Understanding
 
-# Phase 12: Debugging Concurrent Programs
-
-### Learn
-
-- [ ] Deadlock
-- [ ] Starvation
-- [ ] Livelock
-
-### Tools
-
-- [ ] logging
-- [ ] thread identifiers
-- [ ] traceback
+* [ ] Cooperative Scheduling
+* [ ] Async vs Threading
+* [ ] Async vs Multiprocessing
 
 ### Exercises
 
-- [ ] Create deadlock intentionally
-- [ ] Fix deadlock
+* [ ] Async Downloader
+* [ ] Async API Client
+* [ ] Async Chat Server
 
 ---
 
-# Phase 13: Performance Engineering
+# Phase 12: Performance Engineering
 
-### Learn
+### Metrics
 
-- [ ] Profiling
-- [ ] Throughput
-- [ ] Latency
-- [ ] Benchmarking
+* [ ] Throughput
+* [ ] Latency
+* [ ] Scalability
 
-### Tools
+### Profiling
 
-- [ ] time
-- [ ] timeit
-- [ ] cProfile
+* [ ] time
+* [ ] timeit
+* [ ] cProfile
 
-### Exercises
+### Benchmarking
 
-- [ ] Benchmark sync vs thread vs process vs async
-
----
-
-# Phase 14: CPython Internals
-
-## Senior Engineer Level
-
-### Learn
-
-- [ ] CPython architecture
-- [ ] Bytecode
-- [ ] Frame Objects
-- [ ] Eval Loop
-- [ ] Reference Counting
-- [ ] Garbage Collection
-
-### Understand
-
-- [ ] How GIL is implemented
-- [ ] Thread scheduling in CPython
-- [ ] Why atomic operations appear safe
+* [ ] Sync vs Thread
+* [ ] Thread vs Process
+* [ ] Thread vs Async
 
 ---
 
-# Phase 15: OS-Level Concurrency
+# Phase 13: Advanced Synchronization
 
-## Systems Understanding
+### Atomic Operations
 
-### Learn
+* [ ] Atomicity
+* [ ] Compare And Swap (CAS)
+* [ ] Spin Locks
 
-- [ ] POSIX Threads
-- [ ] Kernel Threads
-- [ ] User Threads
-- [ ] Scheduler
-- [ ] Preemptive Scheduling
-- [ ] CPU Affinity
+### Advanced Locks
 
-### Understand
+* [ ] Mutex
+* [ ] Reader Writer Locks
 
-- [ ] How Python threads map to OS threads
-- [ ] Context Switch Cost
+### Memory Concepts
 
----
+* [ ] Memory Visibility
+* [ ] Happens-Before
+* [ ] Memory Barriers
 
-# Phase 16: Build Real Projects
+### Advanced Topics
 
-### Beginner
-
-- [ ] Multi-file downloader
-- [ ] Concurrent web scraper
-
-### Intermediate
-
-- [ ] Chat server
-- [ ] Background job system
-
-### Advanced
-
-- [ ] Mini Celery clone
-- [ ] Distributed task queue
-- [ ] Thread-safe cache
-
-### Expert
-
-- [ ] Build your own ThreadPoolExecutor
-- [ ] Build your own Future object
-- [ ] Build your own Event Loop
-- [ ] Read CPython threading source code
+* [ ] Lock-Free Programming
+* [ ] Wait-Free Programming
 
 ---
 
-# Final Mastery
+# Phase 14: ThreadPool Internals
+
+### Internal Components
+
+* [ ] Task Queue
+* [ ] Worker Lifecycle
+* [ ] Scheduling
+
+### Future Internals
+
+* [ ] State Machine
+* [ ] Cancellation
+* [ ] Exception Propagation
+
+### Build
+
+* [ ] Custom Thread Pool
+* [ ] Custom Future
+
+---
+
+# Phase 15: CPython Internals
+
+### Interpreter
+
+* [ ] CPython Architecture
+* [ ] Bytecode
+* [ ] Eval Loop
+
+### GIL Internals
+
+* [ ] ceval.c
+* [ ] GIL Acquisition
+* [ ] GIL Release
+
+### Thread State
+
+* [ ] PyThreadState
+* [ ] Interpreter State
+
+### Memory
+
+* [ ] Reference Counting
+* [ ] Garbage Collection
+
+---
+
+# Phase 16: Operating System Internals
+
+### Scheduling
+
+* [ ] Round Robin
+* [ ] Fair Scheduling
+* [ ] Time Slice
+
+### Queues
+
+* [ ] Run Queue
+* [ ] Ready Queue
+* [ ] Waiting Queue
+
+### CPU Internals
+
+* [ ] CPU Cache
+* [ ] Cache Lines
+* [ ] False Sharing
+* [ ] NUMA Basics
+
+### Threading
+
+* [ ] POSIX Threads
+* [ ] Kernel Threads
+* [ ] User Threads
+
+---
+
+# Phase 17: Distributed Concurrency
+
+### Concepts
+
+* [ ] Distributed Systems Basics
+* [ ] Distributed Work Queue
+* [ ] Distributed Scheduling
+
+### Coordination
+
+* [ ] Distributed Lock
+* [ ] Leader Election
+
+### Scalability
+
+* [ ] Work Stealing
+* [ ] Map Reduce Basics
+
+---
+
+# Phase 18: Real Projects
+
+## Beginner
+
+* [ ] Multi-file Downloader
+* [ ] URL Checker
+* [ ] Parallel File Processor
+
+## Intermediate
+
+* [ ] Web Scraper
+* [ ] Background Worker
+* [ ] Thread-safe Logger
+* [ ] API Aggregator
+
+## Advanced
+
+* [ ] ThreadPoolExecutor Clone
+* [ ] Future Clone
+* [ ] Event Loop Clone
+* [ ] Celery Mini Clone
+
+## Expert
+
+* [ ] Concurrent Web Server
+* [ ] Redis-like Task Queue
+* [ ] Distributed Scheduler
+* [ ] Distributed Worker System
+
+---
+
+# Final Mastery Checklist
 
 Can Explain:
 
-- [ ] Process vs Thread
-- [ ] Concurrency vs Parallelism
-- [ ] Thread vs Asyncio
-- [ ] Thread vs Multiprocessing
-- [ ] GIL Internals
-- [ ] Deadlock
-- [ ] Race Condition
-- [ ] ThreadPoolExecutor Internals
-- [ ] Event Loop Internals
-- [ ] CPython Scheduler Behavior
+* [ ] Concurrency vs Parallelism
+* [ ] Process vs Thread
+* [ ] Thread vs Asyncio
+* [ ] Thread vs Multiprocessing
+* [ ] GIL Internals
+* [ ] Deadlock
+* [ ] Race Conditions
+* [ ] Backpressure
+* [ ] Reactor Pattern
+* [ ] CAS
+* [ ] Lock-Free Structures
+* [ ] CPython Threading Internals
+* [ ] OS Scheduling
 
 Can Build:
 
-- [ ] Thread-safe applications
-- [ ] Concurrent network services
-- [ ] High throughput systems
-- [ ] Production-grade worker pools
+* [ ] Thread-safe Applications
+* [ ] High Throughput Systems
+* [ ] Thread Pools
+* [ ] Event Loops
+* [ ] Worker Queues
+* [ ] Concurrent Services
+* [ ] Distributed Task Systems

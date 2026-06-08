@@ -25,24 +25,42 @@ Bonus:
 """
 import datetime
 
-name = input("What is your name ? ").strip()
-age = input("How old are you ? ").strip()
-city = input("Which city do you live in? ").strip()
-profession = input("What is your profession? ").strip()
-hobby = input("WHat is your favourite hobby? ").strip()
 
-intro_message = (
-    f"Hello! my name is {name}, I'm {age} years old and live in {city}. "
-    f"I work as a {profession} and I absolutely enjoy {hobby} in my free time. "
-    f"Nice to meet you!\n"
-)
+# --- THIS IS YOUR UTILITY FUNCTION ---
+def generate_profile_card(name: str, age: str, city: str, profession: str, hobby: str) -> str:
+    """Takes user details and returns a beautifully framed introduction card."""
+    
+    # 1. Format the text
+    intro = (
+        f"Hello! My name is {name.title().strip()}. I'm {age.strip()} years old and live in {city.title().strip()}.\n"
+        f"I work as a {profession.title().strip()} and I absolutely enjoy {hobby.strip()} in my free time.\n"
+        f"Nice to meet you!\n\n"
+        f"Logged on: {datetime.date.today().isoformat()}"
+    )
+    
+    # 2. Build the dynamic frame
+    lines = intro.split('\n')
+    max_len = max(len(line) for line in lines)
+    border = "*" * (max_len + 2)
+    
+    # 3. Assemble the card
+    card = f"{border}\n"
+    for line in lines:
+        # Ljust(max_len) ensures all lines have the exact same width inside the box
+        card += f"{line.ljust(max_len)}\n"
+    card += border
+    
+    return card
 
-
-current_date = datetime.date.today().isoformat()
-intro_message += f"\n Logged on: {current_date}"
-
-
-border = "*" * 80
-final_output = f"{border}\n{intro_message}\n{border}"
-
-print("\n" + final_output)
+# --- THIS IS YOUR MAIN APPLICATION ---
+if __name__ == "__main__":
+    # Gather inputs
+    u_name = input("Name: ")
+    u_age = input("Age: ")
+    u_city = input("City: ")
+    u_prof = input("Profession: ")
+    u_hobby = input("Hobby: ")
+    
+    # Use the utility
+    final_card = generate_profile_card(u_name, u_age, u_city, u_prof, u_hobby)
+    print("\n" + final_card)

@@ -1,0 +1,79 @@
+import json
+
+class UserAccount:
+    # A class variable (Shared state across the entire blueprint)
+    system_tier_default = "Standard"
+
+    def __init__(self, username: str, email: str, role: str):
+        """Standard Constructor: Expects cleanly separated, pre-parsed parameters."""
+        self.username = username
+        self.email = email
+        self.role = role
+        print(f"[Init] Account instantiated for '{self.username}' ({self.role})")
+
+    # ==========================================
+    # 1. ALTERNATIVE CONSTRUCTOR (Factory Method)
+    # ==========================================
+    @classmethod
+    def from_json(cls, json_string: str):
+        """
+        Alternative Constructor: Takes a raw JSON payload, parses it, 
+        and safely instantiates a new instance of the class.
+        """
+        print("\n[Factory - JSON] Intercepting raw configuration string...")
+        data = json.loads(json_string)
+        
+        # 'cls' points directly to the Class 'UserAccount'.
+        # Executing 'cls(...)' is identical to calling 'UserAccount(...)' directly.
+        return cls(
+            username=data.get("user_id"),
+            email=data.get("email_address"),
+            role=data.get("access_role", "guest")
+        )
+
+    # ==========================================
+    # 2. ALTERNATIVE CONSTRUCTOR (System Default Factory)
+    # ==========================================
+    @classmethod
+    def create_guest_account(cls, username: str):
+        """Alternative Constructor: Builds a predefined configuration profile."""
+        print(f"\n[Factory - Guest] Auto-configuring baseline account for '{username}'...")
+        default_email = f"{username}@guest.internal"
+        
+        # Using cls ensures that if a subclass inherits this method, 
+        # it will instantiate an object of that subclass, not the parent!
+        return cls(username=username, email=default_email, role="guest")
+
+    # ==========================================
+    # 3. CLASS UTILITY MODIFIER
+    # ==========================================
+    @classmethod
+    def update_global_tier(cls, new_tier: str):
+        """Modifies shared class state by targeting 'cls' directly."""
+        print(f"\n[Class Method] Mutating system_tier_default variable across class: {cls.__name__}")
+        cls.system_tier_default = new_tier
+
+
+# ==========================================
+# RUNNING THE FACTORY ENGINE
+# ==========================================
+print("--- Phase 1: Using the Standard Constructor ---")
+user_standard = UserAccount("alice99", "alice@email.com", "admin")
+
+
+print("\n--- Phase 2: Deploying Alternative Class Factories ---")
+
+# Scenario A: Incoming data arrives as a raw serialized JSON string (e.g., from an API endpoint)
+raw_api_payload = '{"user_id": "bob_builder", "email_address": "bob@corp.com", "access_role": "developer"}'
+user_from_web = UserAccount.from_json(raw_api_payload)
+
+# Scenario B: Creating a specialized profile with a simplified interface
+user_guest = UserAccount.create_guest_account("charlie_guest")
+
+
+print("\n--- Phase 3: Introspecting Class State Mutation ---")
+print(f"Default Tier before update: {UserAccount.system_tier_default}")
+
+# Updating global class state via classmethod
+UserAccount.update_global_tier("Enterprise-Premium")
+print(f"Default Tier after update:  {UserAccount.system_tier_default}")

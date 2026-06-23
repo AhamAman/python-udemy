@@ -1,0 +1,76 @@
+class Drone:
+    # ==========================================
+    # 1. CLASS ATTRIBUTE (Shared Data)
+    # ==========================================
+    # This lives directly on the class object. All instances share this single variable.
+    fleet_category = "Surveillance"
+    total_drones_deployed = 0
+
+    def __init__(self, drone_id: str):
+        # ==========================================
+        # 2. INSTANCE ATTRIBUTES (Object-Specific Data)
+        # ==========================================
+        # These live inside the individual object's __dict__ memory space.
+        self.drone_id = drone_id
+        self.battery = 100.0
+        
+        # Accessing class attribute to track global state modifications
+        Drone.total_drones_deployed += 1
+
+
+# ==========================================
+# RUNNING THE BEHAVIOR TRIAL
+# ==========================================
+print("--- Phase 1: Instance vs. Class Attributes ---")
+
+drone_a = Drone(drone_id="Alpha-1")
+drone_b = Drone(drone_id="Beta-2")
+
+# Reading Instance Attributes (Unique values)
+print(f"Drone A ID: {drone_a.drone_id} | Drone B ID: {drone_b.drone_id}")
+
+# Reading Class Attributes (Shared value)
+print(f"Shared Fleet Category via Class: {Drone.fleet_category}")
+print(f"Shared Fleet Category via Drone A: {drone_a.fleet_category}") # Traverses lookup chain
+print(f"Global Deployment Count: {Drone.total_drones_deployed}")
+
+
+print("\n--- Phase 2: Dynamic Attribute Modification ---")
+
+# 1. Updating attributes
+drone_a.battery = 85.5
+
+# 2. Dynamic Creation: Python allows adding attributes on the fly that weren't in __init__
+drone_a.laser_equipped = True
+print(f"Drone A Laser Status: {drone_a.laser_equipped}")
+
+# Introspection: Let's look inside their actual underlying dictionaries
+print(f"Drone A __dict__: {drone_a.__dict__}")
+print(f"Drone B __dict__: {drone_b.__dict__} (Notice: No 'laser_equipped' or 'battery' override)")
+
+
+print("\n--- Phase 3: Deleting Attributes ---")
+
+print(f"Before deletion: {drone_a.drone_id=}")
+del drone_a.drone_id
+
+try:
+    # This will fail because the variable key was removed from the dictionary
+    print(drone_a.drone_id)
+except AttributeError as e:
+    print(f"Caught Expected Error: {e}")
+
+
+print("\n--- Phase 4: The Shared vs. Shadowing Pitfall ---")
+
+# What happens if we try to modify a class attribute via an instance pointer?
+drone_b.fleet_category = "Tactical Combat" # Common mistake!
+
+print(f"Drone B Fleet Category: {drone_b.fleet_category}") 
+print(f"Drone A Fleet Category: {drone_a.fleet_category}")
+print(f"Global Class Category:  {Drone.fleet_category}")
+
+# Causal Explanation:
+# Instead of modifying the shared class variable, 'drone_b.fleet_category =' explicitly 
+# created a NEW instance attribute inside drone_b's __dict__, shadowing the class attribute.
+print(f"Drone B unique dict now contains: {drone_b.__dict__}")

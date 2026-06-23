@@ -1,0 +1,51 @@
+# ==========================================
+# 1. Basic Conditional Mechanics
+# ==========================================
+print("--- Basic Control Flow ---")
+temperature = 25
+
+# Evaluating truthiness directly
+if temperature > 20:
+    # This block only runs if the condition above is True
+    print("Action: Turn on the cooling system.")
+    print("Inside the block: This line also runs.")
+
+print("Outside the block: Execution continues normally here regardless of temperature.")
+
+
+# ==========================================
+# 2. Evaluation via Implicit Truthiness
+# ==========================================
+print("\n--- Truthiness Evaluation ---")
+active_notifications = 5
+
+if active_notifications: # Evaluates to True because 5 is a non-zero integer
+    print(f"You have {active_notifications} unread alerts.")
+
+
+# ==========================================
+# 3. Handling Empty Blocks with 'pass'
+# ==========================================
+print("\n--- The 'pass' Placeholder ---")
+system_error = True
+
+if system_error:
+    # TODO: Write code to email the infrastructure team later.
+    # We use 'pass' so the program runs without throwing an IndentationError.
+    pass 
+
+print("System safety check bypassed smoothly using 'pass'.")
+
+
+# ==========================================
+# 4. Indentation Mistakes (Simulated)
+# ==========================================
+print("\n--- What an IndentationError looks like ---")
+try:
+    # We use exec() here to simulate parsing bad code without crashing this entire file
+    exec("""
+if True:
+print("This will crash because it lacks indentation!")
+    """)
+except IndentationError as err:
+    print(f"Caught expected parsing error: {err}")

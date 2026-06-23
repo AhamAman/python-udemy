@@ -1,0 +1,40 @@
+import asyncio
+import inspect
+import time
+
+async def life_cycle_target():
+    print("    [Inside Coro] Code execution started...")
+    # This await point forces the coroutine to pause and enter a suspended state
+    await asyncio.sleep(1.0)
+    print("    [Inside Coro] Resumed cleanly! Completing execution path...")
+    return "🚀 Final Payload"
+
+async def orchestrator():
+    print("=== MONITORING COROUTINE LIFECYCLE STATES ===")
+    
+    # 1. CREATE STATE
+    coro_object = life_cycle_target()
+    print(f"1. Instantiated Coroutine Object: {coro_object}")
+    print(f"   Inspection State: {inspect.getcoroutinestate(coro_object)}") # Expected: CORO_CREATED
+    
+    # Wrap it inside a Task to schedule it on the active event loop
+    task = asyncio.create_task(coro_object)
+    
+    # Give the loop a tiny fraction of a second to start running the task
+    await asyncio.sleep(0.1)
+    
+    # 2. SUSPENDED STATE
+    # The target coroutine has hit 'await asyncio.sleep(1.0)', so it should be paused
+    print(f"\n2. Target coroutine hit an active 'await' barrier.")
+    print(f"   Inspection State: {inspect.getcoroutinestate(coro_object)}") # Expected: CORO_SUSPENDED
+    
+    # Block and wait for the task to finish completely
+    result = await task
+    
+    # 3. CLOSED STATE
+    print(f"\n3. Target coroutine hit return evaluation boundary. Output: '{result}'")
+    print(f"   Inspection State: {inspect.getcoroutinestate(coro_object)}") # Expected: CORO_CLOSED
+
+if __name__ == "__main__":
+    asyncio.run(orchestrator())
+

@@ -1,0 +1,76 @@
+import functools
+
+# ==========================================
+# 1. THE DECORATORS
+# ==========================================
+
+def audit_log(func):
+    """A standard decorator applied to methods."""
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        # args[0] will be 'self' for instance methods, or 'cls' for class methods
+        print(f"\n[Audit] Intercepting call to '{func.__name__}'")
+        print(f"        Positional arguments received: {args}")
+        
+        # We can introspect the host object if it's an instance method
+        if args and hasattr(args[0], "__class__"):
+            print(f"        Called from an instance of: {args[0].__class__.__name__}")
+            
+        result = func(*args, **kwargs)
+        print(f"[Audit] Completed '{func.__name__}'. Result: {result}")
+        return result
+    return wrapper
+
+
+# ==========================================
+# 2. THE HOST CLASS
+# ==========================================
+
+class BankAccount:
+    def __init__(self, owner: str, balance: float):
+        self.owner = owner
+        self.balance = balance
+
+    # --- Case A: Decorating an Instance Method ---
+    # Python passes 'self' implicitly as args[0] to our wrapper.
+    @audit_log
+    def deposit(self, amount: float):
+        self.balance += amount
+        return f"New Balance: ${self.balance}"
+
+    # --- Case B: Decorating a Class Method ---
+    # CRITICAL: Always place @classmethod OUTSIDE (above) your custom decorator.
+    # Why? @classmethod doesn't return a normal function; it returns a descriptor object.
+    # If @audit_log is on top, it won't receive a function to wrap, causing an AttributeError.
+    @classmethod
+    @audit_log
+    def create_anonymous(cls):
+        print(f"   [Class Method] Executing factory logic using class: {cls.__name__}")
+        return cls(owner="Anonymous", balance=0.0)
+
+    # --- Case C: Decorating a Static Method ---
+    # Like classmethod, place @staticmethod OUTSIDE (above) your custom decorator.
+    @staticmethod
+    @audit_log
+    def is_valid_routing_number(routing_num: str):
+        print(f"   [Static Method] Validating string: {routing_num}")
+        return len(routing_num) == 9
+
+
+# ==========================================
+# 3. RUNNING THE CODE
+# ==========================================
+print("--- Execution & Introspection ---")
+
+# Test A: Instance Method
+print("\n>>> Scenario A: Depositing Money")
+account = BankAccount("Alice", 500.0)
+account.deposit(150.0)
+
+# Test B: Class Method
+print("\n>>> Scenario B: Generating an Anonymous Account")
+anon_account = BankAccount.create_anonymous()
+
+# Test C: Static Method
+print("\n>>> Scenario C: Checking a Routing Number")
+is_valid = BankAccount.is_valid_routing_number("123456789")

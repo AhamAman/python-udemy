@@ -92,13 +92,13 @@ A complete roadmap from beginner usage to deep language internals, design decisi
 
 # 🌱 Nested Conditionals
 
-* [ ] What is a nested conditional?
-* [ ] Why nest conditionals?
-* [ ] How deep can nesting go?
-* [ ] What problems arise from excessive nesting?
-* [ ] How can nested conditionals be simplified?
-* [ ] What is the pyramid of doom?
-* [ ] What are alternatives to deeply nested conditions?
+* [x] What is a nested conditional?
+* [x] Why nest conditionals?
+* [x] How deep can nesting go?
+* [x] What problems arise from excessive nesting?
+* [x] How can nested conditionals be simplified?
+* [x] What is the pyramid of doom?
+* [x] What are alternatives to deeply nested conditions? 
 
 ---
 
@@ -250,7 +250,7 @@ A complete roadmap from beginner usage to deep language internals, design decisi
 * [ ] Hot-path optimization
 * [ ] Short-circuit optimization
 * [ ] Membership lookup performance
-* [ ] Dictionary dispatch vs if-elif chains
+* [x] Dictionary dispatch vs if-elif chains (e.g., [nested_vs_dict_control.py](file:///E:/Data%20cohort/python-udemy/concept/03_conditionals/nested_vs_dict_control.py))
 
 ---
 
@@ -321,3 +321,5 @@ A complete roadmap from beginner usage to deep language internals, design decisi
 * [ ] How does CPython execute branching internally?
 * [ ] Could you implement Python's conditional execution from scratch?
 * [ ] Could you design a rule engine without relying heavily on if statements?
+
+---

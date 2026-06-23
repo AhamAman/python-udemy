@@ -1,0 +1,64 @@
+import queue
+
+# ---------------------------------------------------------
+# The Coroutines (Yield-based tasks)
+# ---------------------------------------------------------
+def task_worker(name, work_units):
+    """A yield-based coroutine representing a cooperative task."""
+    print(f"🎬 [Task {name}] Started.")
+    
+    for i in range(1, work_units + 1):
+        # The coroutine does a bit of 'work'
+        print(f"⚙️ [Task {name}] Processing step {i}/{work_units}...")
+        
+        # COOPERATIVE YIELD: The task voluntarily pauses here, 
+        # handing control back to the scheduler, and waits for a signal to resume.
+        status_signal = yield f"Task {name} completed step {i}"
+        
+        print(f"📥 [Task {name}] Woke up by scheduler signal: '{status_signal}'")
+
+    print(f"🏁 [Task {name}] Finished all work.")
+
+
+# ---------------------------------------------------------
+# The Scheduler (Primitive Event Loop)
+# ---------------------------------------------------------
+if __name__ == "__main__":
+    print("--- 1. Initializing Cooperative Tasks ---")
+    # Instantiating the coroutines
+    coro_a = task_worker("A", 3)
+    coro_b = task_worker("B", 2)
+
+    # A simple FIFO task queue
+    task_queue = queue.Queue()
+    
+    # Prime the coroutines (advance to the first yield) and queue them
+    next(coro_a)
+    next(coro_b)
+    
+    task_queue.put(coro_a)
+    task_queue.put(coro_b)
+
+    print("\n--- 2. Starting the Event Loop ---")
+    step_count = 1
+    
+    while not task_queue.empty():
+        # Get the next task ready to run
+        current_task = task_queue.get()
+        print(f"\n🌀 [Loop Step {step_count}] Scheduling next task...")
+        
+        try:
+            # Send a signal to resume the coroutine.
+            # This executes the task until it hits its NEXT yield.
+            current_task.send(f"Token for step {step_count}")
+            
+            # If it didn't finish, put it back in the queue to share CPU time
+            task_queue.put(current_task)
+            
+        except StopIteration:
+            # This exception means the coroutine reached its end and returned
+            print("🔔 [Loop] A task completed entirely and was removed from the queue.")
+            
+        step_count += 1
+
+    print("\n🏁 [Loop] All tasks finished. Execution complete.")

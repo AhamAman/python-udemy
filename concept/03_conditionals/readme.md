@@ -250,7 +250,7 @@ A complete roadmap from beginner usage to deep language internals, design decisi
 * [ ] Hot-path optimization
 * [ ] Short-circuit optimization
 * [ ] Membership lookup performance
-* [x] Dictionary dispatch vs if-elif chains (e.g., [nested_vs_dict_control.py](file:///E:/Data%20cohort/python-udemy/concept/03_conditionals/nested_vs_dict_control.py))
+* [ ] Dictionary dispatch vs if-elif chains 
 
 ---
 
